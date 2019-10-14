@@ -2,13 +2,14 @@ import React from 'react';
 
 class BookList extends React.Component {
     render() {
+        console.log(this.props.books);
         const books = this.props.books.map((item, index) => {
             return (
                 <div key={index} className="booklist-container">
-                    <img src={item.volumeInfo.imageLinks.smallThumbnail} alt="book_thumbnail" />>
+                    <img src={item.volumeInfo.imageLinks.smallThumbnail} alt="book_thumbnail" />
                     <ul>
                         <li>{item.volumeInfo.title}</li>
-                        <li>{(item.volumeInfo.authors) ? item.volumeInfo.authors.join('') : ''}</li>
+                        <li>{(item.volumeInfo.authors) ? item.volumeInfo.authors.join(' ') : ''}</li>
                         <li>
                             {(item.saleInfo.saleability === 'FOR SALE') ? this.props.currency.format(item.saleInfo.retailPrice.amount) : 'Free'}
                         </li>

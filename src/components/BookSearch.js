@@ -1,5 +1,4 @@
 import React from 'react';
-// import BookSearchSelector from './BookSearchSelector';
 
 class BookSearch extends React.Component { 
   
@@ -13,7 +12,7 @@ class BookSearch extends React.Component {
         <form className="search-selector" onSubmit={this.searchTermHandle}> 
           <label htmlFor="search_input">Search:</label>
           <input type="text" name="search_input" id="search_input" placeholder="e.g. Henry"/>
-          <button type="submit" name="search" id="search">Search</button>
+          <button type="submit">Search</button>
         </form>
       )
     }

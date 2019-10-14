@@ -3,8 +3,8 @@ import React from 'react'
  class BookSearchSelector extends React.Component { 
    bookFilter = (e) => {
     e.preventDefault()
-    const printType = e.currentTarget.print_type.value
     const bookType = e.currentTarget.book_type.value
+    const printType = e.currentTarget.print_type.value
     const searchTerm = this.props.searchTerm
     this.props.searchBookTypeFilter(searchTerm, bookType, printType )
    }

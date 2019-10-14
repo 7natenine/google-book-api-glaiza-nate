@@ -20,7 +20,7 @@ class App extends React.Component {
 
   searchBooks = (term) => {
     this.setState({searchTerm: term, loading: true, error: null})
-    fetch(`https://www.googleapis.com/books/v1/volumes?q={term}&filter=ebooks`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}&filter=ebooks`)
     .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
     .then(books => this.setState({books: books.items, loading: false}))
     .catch(error => this.setState({error, loading: false}))
@@ -35,6 +35,9 @@ class App extends React.Component {
 
 
   render() {
+   console.log(this.searchBooks);
+   console.log(this.searchBookTypeFilter);
+
     if(this.state.error){
       return <div>Error: {this.state.error}</div>
     }
