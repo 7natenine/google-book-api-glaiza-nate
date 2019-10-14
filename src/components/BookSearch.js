@@ -8,9 +8,9 @@ class BookSearch extends React.Component {
     }
   
     render() { 
-      console.log(`Checking URL in term ${this.props}`);
+      // console.log(`Checking URL in term ${this.props}`);
       return (
-        <form className="search-selector" onSubmit={this.searchTermHandle}> 
+        <form className="search_selector" onSubmit={this.searchTermHandle}> 
           <label htmlFor="search_input">Search:</label>
           <input type="text" name="search_input" id="search_input" placeholder="e.g. Henry"/>
           <button type="submit">Search</button>

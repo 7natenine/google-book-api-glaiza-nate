@@ -13,20 +13,18 @@ import React from 'react'
     return (
         <form className="book_filter" onChange={this.bookFilter}> 
           <label htmlFor="print_type">Print Type:</label>
-          <select id="print_type" name="print_type">
+          <select className="print_type" name="print_type" id="book_type">
             <option value="all">All</option>
             <option value="books">books</option>
             <option value="magazines">magazines</option>
           </select>
 
           <label htmlFor="book_type">Book Type:</label>
-          <select id="book_type" name="book_type">
+          <select className="book_type" id="book_type" name="book_type">
             <option value="no_filter">No Filter</option>
-            <option value="eBooks">eBooks</option>
-            <option value="free_ebooks">free-ebooks</option>
-            <option value="All">full</option>
-            <option value="paid_ebooks">paid-ebooks</option>
-            <option value="partial">partial</option>
+            <option value="eBooks">All</option>
+            <option value="free_ebooks">Free E-books</option>
+            <option value="paid_ebooks">Paid E-books</option>
           </select>
         </form>
 

@@ -20,25 +20,32 @@ class App extends React.Component {
 
   searchBooks = (term) => {
     this.setState({searchTerm: term, loading: true, error: null})
-    const termURL = `https://www.googleapis.com/books/v1/volumes?q=${term}&filter=ebooks`
-    fetch(termURL)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}`)
     .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
     .then(books => this.setState({books: books.items, loading: false}))
     .catch(error => this.setState({error, loading: false}));
   }
  
   searchBookTypeFilter = (searchTerm, bookType, printType) => {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&filter=${bookType}&printType=${printType}`)
-    .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
-    .then(books => this.setState({books: books.items, loading: false}))
-    .catch(error => this.setState({error, loading: false}));
+    if(printType === 'magazines') {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&printType=${printType}`)
+      .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
+      .then(books => this.setState({books: books.items, loading: false}))
+      .catch(error => this.setState({error, loading: false}));
+    } else {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&filter=${bookType}&printType=${printType}`)
+      .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
+      .then(books => this.setState({books: books.items, loading: false}))
+      .catch(error => this.setState({error, loading: false}));
+    }
+   
   }
 
 
   render() {
-   console.log(`Checking URL in term ${this.termURL}`);
-  //  console.log(this.searchBookTypeFilter);
+    // console.log(this.searchBooks);
 
+    let displayBookList = <BookList currency={USCurrencyFormat} books={this.state.books}/>
     if(this.state.error){
       return <div>Error: {this.state.error}</div>
     }
@@ -52,7 +59,7 @@ class App extends React.Component {
         <BookSearch searchBooks={this.searchBooks}/>
         <BookSearchSelector searchTerm={this.state.searchTerm} searchBookTypeFilter={this.searchBookTypeFilter}/>
         <div>
-          <BookList currency={USCurrencyFormat} books={this.state.books}/>
+          {displayBookList}
         </div>
       </main>
   );
