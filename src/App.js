@@ -20,23 +20,24 @@ class App extends React.Component {
 
   searchBooks = (term) => {
     this.setState({searchTerm: term, loading: true, error: null})
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}&filter=ebooks`)
+    const termURL = `https://www.googleapis.com/books/v1/volumes?q=${term}&filter=ebooks`
+    fetch(termURL)
     .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
     .then(books => this.setState({books: books.items, loading: false}))
-    .catch(error => this.setState({error, loading: false}))
+    .catch(error => this.setState({error, loading: false}));
   }
  
   searchBookTypeFilter = (searchTerm, bookType, printType) => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&filter=${bookType}&printType=${printType}`)
     .then(res => res.ok ? res.json() : Promise.reject('Something went wrong')) 
     .then(books => this.setState({books: books.items, loading: false}))
-    .catch(error => this.setState({error, loading: false}))
+    .catch(error => this.setState({error, loading: false}));
   }
 
 
   render() {
-   console.log(this.searchBooks);
-   console.log(this.searchBookTypeFilter);
+   console.log(`Checking URL in term ${this.termURL}`);
+  //  console.log(this.searchBookTypeFilter);
 
     if(this.state.error){
       return <div>Error: {this.state.error}</div>
@@ -46,12 +47,12 @@ class App extends React.Component {
     }
 
     return (
-      <main className="BookSearchApp">
+      <main className="App">
         <Header />
         <BookSearch searchBooks={this.searchBooks}/>
         <BookSearchSelector searchTerm={this.state.searchTerm} searchBookTypeFilter={this.searchBookTypeFilter}/>
         <div>
-        <BookList currency={USCurrencyFormat} books={this.state.books}/>
+          <BookList currency={USCurrencyFormat} books={this.state.books}/>
         </div>
       </main>
   );

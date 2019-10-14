@@ -8,6 +8,7 @@ class BookSearch extends React.Component {
     }
   
     render() { 
+      console.log(`Checking URL in term ${this.props}`);
       return (
         <form className="search-selector" onSubmit={this.searchTermHandle}> 
           <label htmlFor="search_input">Search:</label>
