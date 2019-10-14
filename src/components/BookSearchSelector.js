@@ -1,33 +1,35 @@
 import React from 'react'
 
  class BookSearchSelector extends React.Component { 
+   bookFilter = (e) => {
+    e.preventDefault()
+    const printType = e.currentTarget.print_type.value
+    const bookType = e.currentTarget.book_type.value
+    const searchTerm = this.props.searchTerm
+    this.props.searchBookTypeFilter(searchTerm, bookType, printType )
+   }
+
   render() { 
     return (
-      <form className="search-selector"> 
-        <label htmlFor="title">Search:</label>
-        <input type="text" name="title" id="title" placeholder="e.g. Henry"/>
-      
-        <div> 
-          <label htmlFor="print-type">Print Type:</label>
-          <select id="print-type" name="print-type">
+        <form className="book_filter" onChange={this.bookFilter}> 
+          <label htmlFor="print_type">Print Type:</label>
+          <select id="print_type" name="print_type">
             <option value="all">All</option>
             <option value="books">books</option>
             <option value="magazines">magazines</option>
           </select>
-        </div>
-        <div>
-          <label htmlFor="Book-Type">Book Type:</label>
-          <select id="book-type" name="book-type">
-            <option value="no-filter">No Filter</option>
+
+          <label htmlFor="book_type">Book Type:</label>
+          <select id="book_type" name="book_type">
+            <option value="no_filter">No Filter</option>
             <option value="eBooks">eBooks</option>
-            <option value="">free-ebooks</option>
+            <option value="free_ebooks">free-ebooks</option>
             <option value="All">full</option>
-            <option value="All">paid-ebooks</option>
-            <option value="All">partial</option>
+            <option value="paid_ebooks">paid-ebooks</option>
+            <option value="partial">partial</option>
           </select>
-        </div>
-        <button type="submit" name="search" id="search">Search</button>
-      </form>
+        </form>
+
     )
   }
 }
